@@ -1,0 +1,39 @@
+
+#header,#container,#footer{
+	margin: 10 auto;
+	width: 80%;
+		
+}
+#header{
+	height: 150px;
+	background: blue;
+}
+#footer{
+	height: 100px;
+	background: yellow;
+	clear: both;
+}
+
+#container {	
+	position: relative;
+}
+#mainbox{
+	margin: 0 auto;
+	height: 500px;
+	width:70%;
+	float: left;
+	background: red;
+	position: relative;
+}
+#sidebox{
+	margin: 0 auto;
+	height: 500px;
+	width:25%;
+	float: right;
+	background: red;
+	position: relative;
+}
+#gap{
+	height : 5px;
+	clear: both;
+}
