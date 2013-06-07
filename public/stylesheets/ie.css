@@ -1,7 +1,0 @@
-.big-button, #footer-sidebar, #footer-sidebar .widget #submit-newsletter, #footer-sidebar .widget #email, .pagination li, .outter, .outter .wrapper, #contact-form #submit-contact, #footer-sidebar .widget .submit-newsletter, #footer-sidebar .widget .email, .our-team .one-forth img, .post-meta .entry-date, .comment-wrap .avatar, #respond #comments-form #submit-comment
-{
-	behavior: url(js/PIE.htc);
-}
-#main-menu #main-nav > li > ul > li {
-	margin-top:-2px;
-}

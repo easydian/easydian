@@ -31,7 +31,7 @@ class Controller
       {path: "/news/:id",       http_method: "get",   method: "get_news"},
       {path: "/news/:id",       http_method: "delete",method: "delete_news"},
 
-      {path: "/dining",               http_method: "get",   method: "dining_index" }
+      {path: "/dining",         http_method: "get",   method: "dining_index" }
     ]
     @ss = new Shop_Schema()
     @us = {} #Userinfo_Schema()
@@ -39,7 +39,7 @@ class Controller
     @cs = new Comment_Schema()
     @ca = new Controller_Assisstant @ss, @us
     return
-    
+
   #show the index page
   index: (req, res) ->    
     res.render 'index.ejs' 

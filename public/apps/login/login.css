@@ -1,0 +1,38 @@
+/*Login Dialog*/
+div#login_wrapper {
+    z-index: 100;
+    background: 00FFFF 0px 50px repeat;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    margin: -130px 0 0 -250px;
+    -webkit-border-radius: 12px;
+    overflow: hidden;
+}
+div#login {
+    line-height: 1.1em;
+    width: 500px;
+    height: 280px;
+}
+div#login button#login_btn {
+    float: right;
+}
+div#login .form {
+    float: left;
+    position: absolute;
+    margin-left: 65px;
+    margin-top: 82px;
+}
+div#login input {
+    border-radius: 6px;
+    border:light blue;
+    display: block;
+    margin: 0 0 16px;
+    padding: 8px;
+    width: 360px;
+}
+div#login input.disabled {
+    background-color: #BBB !important;
+    -webkit-transition: all 0.25s linear;
+    -moz-transition: all 0.25s linear;
+}
