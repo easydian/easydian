@@ -1,5 +1,4 @@
 can.Model("Models.Canyin", {
-    id     : 0,
     findAll: 'GET     /canyin/shops',
     findOne: 'GET     /canyin/shops/{id}',
     create : 'POST    /canyin/shops',

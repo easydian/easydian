@@ -10,7 +10,8 @@ steal(
     'bootstrap', 'cookie', 'lang_json', 'camera',
     'jquery-validation', 'bootstrap', 'superfish',
     'jquery-mobile', 'jquery-easing', 'prettify',
-    'sorting', 'jquery-isotope', 'jquery-tweet'
+    'sorting', 'jquery-isotope', 'jquery-tweet', 
+    'easy-utils'
 )
 .packages('/apps/layout/layout.js')
 .then('/apps/routing/routing.js')

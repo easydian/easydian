@@ -30,7 +30,7 @@ can.fixture('GET /canyin/promotion', function() {
 });
 
 can.fixture('GET /canyin/shops/{id}', function() {
-    return {'_id': random(10000000, 999999), 'shopbadt': [20, 70, 80, 90, 100, 110, 120], 'shopgoodt': [15, 25, 35, 45, 55, 65, 75]};
+    return {'_id': random(10000000, 999999), 'shopbadt': [90, 70, 80, 90, 100, 110, 120], 'shopgoodt': [15, 25, 35, 45, 55, 65, 75]};
 });
 
 can.fixture('POST /canyin/shops', function() {
