@@ -1,7 +1,6 @@
 $(document).ready(function(){  
     //build dropdown
     $("<select />").appendTo("nav#main_menu div");
-    
     // Create default option "Go to..."
     $("<option />", {
        "selected": "selected",

@@ -42,7 +42,7 @@ steal.config({
         "jquery-jcarousel"  : "/lib/jquery/jquery.jcarousel.js",
         "jquery-mobile"     : "/lib/jquery/jquery.mobile.customized.min.js",
         "jquery-easing"     : "/lib/jquery/jquery.easing.1.3.js",
-        "jquery-isotope"    : "/lib/jquery/jquery.isotope.min.js",
+        "jquery-isotope"    : "/lib/jquery/jquery.isotope.js",
         "jquery-validation" : "/lib/utils/jquery.validate.js",
         "jquery-qtip"       : "/lib/utils/jquery.qtip.js",
         "jquery-color"      : "/lib/utils/jquery.color-2.1.2.js",        

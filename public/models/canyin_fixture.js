@@ -29,50 +29,54 @@ can.fixture('GET /canyin/promotion', function() {
         {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'}];
 });
 
-can.fixture('GET /canyin/shops/{id}', function() {
+can.fixture('GET /canyin/shop/{id}', function() {
     return {'_id': random(10000000, 999999), 'shopbadt': [90, 70, 80, 90, 100, 110, 120], 'shopgoodt': [15, 25, 35, 45, 55, 65, 75]};
 });
 
-can.fixture('POST /canyin/shops', function() {
+can.fixture('POST /canyin/shop', function() {
     return 'OK';
 });
 
-can.fixture('PUT /canyin/shops/{id}', function() {
+can.fixture('PUT /canyin/shop/{id}', function() {
     return 'OK';
 });
 
-can.fixture('DELETE /canyin/shops/{id}', function() {
+can.fixture('DELETE /canyin/shop/{id}', function() {
     return 'OK';
 });
 
-can.fixture('PUT /canyin/shops/{id}/visit', function() {
+can.fixture('PUT /canyin/shop/{id}/visit', function() {
     return 'OK';
 });
 
-can.fixture('PUT /canyin/shops/{id}/bad', function() {
+can.fixture('PUT /canyin/shop/{id}/bad', function() {
     return 'OK';
 });
 
-can.fixture('PUT /canyin/shops/{id}/good', function() {
+can.fixture('PUT /canyin/shop/{id}/good', function() {
     return 'OK';
 });
 
-can.fixture('GET /canyin/shops/{id}/comments', function() {
-    return {'_id': random(10000000, 999999)};
+can.fixture('GET /canyin/shop/{id}/comments', function() {
+    return [{'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'},
+        {'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'},
+        {'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'},
+        {'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'},
+        {'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'}];
 });
 
-can.fixture('PUT /canyin/shops/{id}/comment', function() {
+can.fixture('PUT /canyin/shop/{id}/comment', function() {
     return 'OK';
 });
 
-can.fixture('POST /canyin/shops/{id}/comment', function() {
+can.fixture('POST /canyin/shop/{id}/comment', function() {
     return 'OK';
 });
 
-can.fixture('DELETE /canyin/shops/{id}/comment', function() {
+can.fixture('DELETE /canyin/shop/{id}/comment', function() {
     return 'OK';
 });
 
-can.fixture('GET /canyin/shops/{id}/news', function() {
+can.fixture('GET /canyin/shop/{id}/news', function() {
     return 'OK';
 });

@@ -64,7 +64,7 @@ $(document).ready(function(){
 	$('.follow_us a').tooltip();
 	
 	//PrettyPhoto
-	//$("a[rel^='prettyPhoto']").prettyPhoto();
+	$("a[rel^='prettyPhoto']").prettyPhoto();
 	
 	//Image hover
 	$(".hover_img").live('mouseover',function(){
@@ -79,5 +79,7 @@ $(document).ready(function(){
 			$(".preloader").css({'background':'none'});
 		}
 	);
-		
+	
+	
+							
 });	

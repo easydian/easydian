@@ -20,6 +20,15 @@ can.Model("Models.User", {
             type: 'delete'
         });   
     },
+    collect: function(id, data, success) {
+        return can.ajax({
+            url:  '/users/' + id + '/collect',
+            type: 'put',
+            dataType: 'json',
+            data: data,
+            success: success
+        });
+    },     
     create: 'POST /users',
     update: 'PUT /users/{id}',
     destroy: 'DELETE /users/{id}',

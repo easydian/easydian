@@ -7,13 +7,11 @@ steal(
 )
 .then(
     'can_control', 'can_fixture', 'jquery-color',
-    'bootstrap', 'cookie', 'lang_json', 'camera',
-    'jquery-validation', 'bootstrap', 'superfish',
-    'jquery-mobile', 'jquery-easing', 'prettify',
-    'sorting', 'jquery-isotope', 'jquery-tweet', 
+    'bootstrap', 'cookie', 'lang_json',
+    'jquery-validation', 'jquery-tweet', 
+    'jquery-mobile', 'jquery-easing', 'prettify',    
     'easy-utils'
 )
-.packages('/apps/layout/layout.js')
 .then('/apps/routing/routing.js')
 .then(function() {
     // restore the globe states from sessionStorage
