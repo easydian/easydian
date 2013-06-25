@@ -49,7 +49,6 @@ steal(
         'li click': function(element) {
             if(element.attr('id') !== undefined)
                 $.cookie("canyin_comment_id", element.attr('id'));
-            alert($.cookie("canyin_comment_id"));
         },
         'a[id*="update"] click': function(element) {            
             if($.cookie("canyin_comment_id")) {
@@ -61,7 +60,6 @@ steal(
                         }
                     })
                 ).then(function(){
-                    alert("update");
                     $('#' + $.cookie("canyin_comment_id")).remove();
                 });                
             }
@@ -76,7 +74,6 @@ steal(
                         }                        
                     })
                 ).then(function(){
-                    alert("delete");
                     $('#' + $.cookie("canyin_comment_id")).remove();
                 });                
             }
