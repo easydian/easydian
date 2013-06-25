@@ -3,34 +3,35 @@
  */
 Apps.canyinData = {};
 
-var random = function(min, max) {
-    return Math.ceil(Math.random() * (max - min) + min);
-};
-
 can.fixture('GET /canyin/shops', function() {
-    return [{'_id': random(10000000, 999999), 'description': 'Description', 'style': 'chinese-style', 'shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'},
-        {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'},
-        {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'chinese-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'},
-        {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'},
-        {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'}];
+    return [{'_id': can.fixture.rand(10000000, 999999), 'description': 'Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante. \
+    Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut.', 'style': 'chinese-style', 'shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut.', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'chinese-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante. \
+    Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut.', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'}];
 });
 
 can.fixture('GET /canyin/ads', function() {
-    return [{'shopwebsite': 'www.edian.com', 'shoplogo': '/images/slider/' + random(1, 3) + '.jpg'},
-        {'shopwebsite': 'www.edian.com', 'shoplogo': '/images/slider/' + random(1, 3) + '.jpg'},
-        {'shopwebsite': 'www.edian.com', 'shoplogo': '/images/slider/' + random(1, 3) + '.jpg'}];
+    return [{'shopwebsite': 'www.edian.com', 'shoplogo': '/images/slider/' + can.fixture.rand(1, 3) + '.jpg'},
+        {'shopwebsite': 'www.edian.com', 'shoplogo': '/images/slider/' + can.fixture.rand(1, 3) + '.jpg'},
+        {'shopwebsite': 'www.edian.com', 'shoplogo': '/images/slider/' + can.fixture.rand(1, 3) + '.jpg'}];
 });
 
 can.fixture('GET /canyin/promotion', function() {
-    return [{'_id': random(10000000, 999999), 'description': 'Description', 'style': 'chinese-style', 'shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'},
-        {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'},
-        {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'chinese-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'},
-        {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'},
-        {'_id': random(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + random(1, 9) + '.jpg'}];
+    return [{'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'chinese-style', 'shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'chinese-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
+        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'}];
 });
 
 can.fixture('GET /canyin/shop/{id}', function() {
-    return {'_id': random(10000000, 999999), 'shopbadt': [90, 70, 80, 90, 100, 110, 120], 'shopgoodt': [15, 25, 35, 45, 55, 65, 75]};
+    return {'_id': can.fixture.rand(10000000, 999999), 'shopbadt': [90, 70, 80, 90, 100, 110, 120], 'shopgoodt': [15, 25, 35, 45, 55, 65, 75]};
 });
 
 can.fixture('POST /canyin/shop', function() {
@@ -64,10 +65,10 @@ can.fixture('GET /canyin/shop/{id}/comments', function() {
         {'_id': 4, 'username': 'Tom Sawyer', 'comment': 'I like this site, has inline comments', 'createtime': '25 Apr 2013', 'inline': true, 'reply_id': '33333'},
         {'_id': 5, 'username': 'Adam White', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': true, 'reply_id': '33333'},
         {'_id': 111111, 'username': 'Adam White', 'comment': 'I like this site, has inline comments', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': '1,2'},
-        {'_id': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''},
-        {'_id': random(10000000, 999999), 'username': 'Tom Sawyer', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''},
+        {'_id': can.fixture.rand(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''},
+        {'_id': can.fixture.rand(10000000, 999999), 'username': 'Tom Sawyer', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''},
         {'_id': 33333, 'username': 'Tom Sawyer', 'comment': 'I like this site, has inline comments', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': '3,4,5'},
-        {'_id': random(10000000, 999999), 'username': 'Adam White', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''}];        
+        {'_id': can.fixture.rand(10000000, 999999), 'username': 'Adam White', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''}];        
 });
 
 can.fixture('GET /canyin/shop/{id}/comment', function() {
