@@ -21,8 +21,9 @@ class Shop_Schema
     @shop_schema = new Schema({
       shopname : {type:String, default:'fullname'},
       shopalias : {type:Array, default: ['short name']},
-      shoptype : {type:String, default:'Dining'},
-      shopnote: {type:String,default:"what do"}
+      shoptype : {type:String, default:'canyin'},
+      shopnote: {type:String,default:"what do"},
+      shopstyle : {type:String,default:"class"},
       shopvisit : {type:Number, default:1000},
       shoppriority : {type: Number, default:1000},
       shopwebsite: {type:String, default: 'fullurl'},
