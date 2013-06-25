@@ -15,7 +15,7 @@ class initcontroller
     ]
 
   index: (req,res) ->
-    res.render(new EJS('index.ejs'))
+    res.render 'index.ejs'
     
 
 class Controller

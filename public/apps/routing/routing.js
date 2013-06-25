@@ -46,9 +46,14 @@ can.Control('Apps.RoutingCtrl', {
                 }
 
             } else {                 
-                steal('/apps/layout/layout.js', function() {
-                    $('#page_container').empty();
-                    new Apps.LayoutCtrl($('#page_container'));
+                //steal('/apps/layout/layout.js', function() {
+                //    $('#page_container').empty();
+                //    new Apps.LayoutCtrl($('#page_container'));
+                //});
+                steal('/apps/canyin/canyin.js', function() {                
+                    if(sub !== 'praise' && sub !== 'collect' && sub !== 'criticize')
+                        $('#page_container').empty();                                                             
+                    new Apps.CanyinCtrl($('#page_container'), {page: sub});
                 });
             }
         }

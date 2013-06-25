@@ -33,18 +33,23 @@ can.Control('Apps.CanyinCtrl', {
                 steal('jquery-prettyPhoto', '/css/prettyPhoto.css').then(function(){                                    
                     var tool_bar = '<div class="twitter"><a id="praise" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_343_thumbs_up.png" alt="" /></a><a id="collect" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_049_star.png" alt="" /></a><a id="criticize" href="javascript:void(0)"" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_344_thumbs_down.png" alt="" /></a></div>';
                     //PrettyPhoto
-                    $("a[rel^='prettyPhoto']").prettyPhoto({theme:'light_rounded', social_tools: tool_bar, resethash: 'canyin',                   
+                    $("a[rel^='prettyPhoto']").prettyPhoto({theme:'light_rounded', social_tools: tool_bar, resethash: 'canyin', default_height: 544, default_width: 600,                 
                         beforeinlineclonecallback: function(){
-                            $('#canyin_chart_view').css({'height':'200px', 'width':'500px'});
+                            $('#canyin_chart_view').css({'height':'200px', 'width':'600px'});
+                            $('#canyin_comment_view').css({'height':'200px', 'width':'600px'});
                         }, 
                         changepicturecallback: function() {
                             $('#inline_canyin_chart_view').empty();
                             Models.Canyin.findOne({id: $.cookie("canyin_shop_id")}, function(data){
                                 self.create_spline_view(data);
-                            });                                
+                            });  
+                            Models.CanyinComment.findAll({id: $.cookie("canyin_shop_id")}, function(data){
+                                self.render_comments(data);
+                            });                                                           
                         },  
                         callback: function() {
                             easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_chart_view');                                          
+                            easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_comment_view');                                          
                         }
                     });
                 });                                 
@@ -118,7 +123,7 @@ can.Control('Apps.CanyinCtrl', {
                     renderTo: 'canyin_chart_view',
                     type  : 'spline',
                     height: 200,
-                    width : 500
+                    width : 600
                 },
                 credits: {
                     enabled: true,
@@ -174,7 +179,14 @@ can.Control('Apps.CanyinCtrl', {
                 }]
             });
         });               
-    },      
+    }, 
+    render_comments: function(data) {        
+        steal('jquery-jcarousel').then('/css/skins/tango/skin.css').then(function(){ 
+            $('#canyin_comment_view').append(can.view('/apps/canyin/ejs/inline_comment.ejs', data));
+
+            $('#inline_comment').jcarousel();  
+        });
+    },
     get_current_user: function(current_user) {
         return defaults.current_user;
     }
