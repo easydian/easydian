@@ -1,21 +1,26 @@
 var Shop_Schema = require("../lib/easydian/model/shop_schema")
 require('../lib/easydian/config')
 
-xdescribe("shop schema",function(){
+describe("shop schema",function(){
   
   var sd, doc;
   //var ExistID = '514ace690a16f3140c000001';
   var ExistID = '514b0e2c8b4309c20a000001';
   sd = new Shop_Schema();
   doc = {
-    shopname : 'fullname',
-    shopalias : ['short name'],
-    shoptype : 'Dining',
+    shopname : '肯德基（KFC）',
+    shopalias : ['肯德基','KFC','肯塔基州炸鸡'],
+    shopstyle: ["快餐","西式"]
+    shoptype : 'canyin',
+    shopnote:"肯德基全球总部设在美国肯塔基州的路易斯维尔市，是世界上最大的鸡肉餐饮连锁店，1952年由创始人山德士先生（Colonel Harland Sanders）创建，全球最大的餐饮集团百胜餐饮集团拥有该品牌。
+              肯德基自1987年在北京前门开出中国第一家餐厅到现在，来到中国已经第26年了。肯德基在中国的26年，是“立足中国、融入生活”的26年，是“为中国而改变，全力打造‘新快餐’”的26年。
+              26年来，肯德基一直都在努力探索，把最贴心的服务回馈给广大中国消费者。截至2012年12月底，肯德基在中国800多个城市和乡镇拥有了超过4200家餐厅，遍及中国大陆除西藏以外的所有省、市、自治区，
+              是中国规模最大、发展最快的快餐连锁企业。"
     shopvisit : 1000,
     shoppriority : 1000,
-    shopwebsite: 'fullurl',
-    shopphone:  ['010-22222222'],
-    shoponbusiness: true,
+    shopwebsite: 'http://www.4008823823.com.cn',
+    shopphone:  ['4008823823'],
+    shoponbusiness: true, 
     shoponadv: true,
     shopweekstats:[
       [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -51,7 +56,7 @@ xdescribe("shop schema",function(){
   doc.shopcreatetime = new Date;
   doc.shopcommentsnum = 10;
 
-  it("constructor: can create an instance",function(){
+  xit("constructor: can create an instance",function(){
     expect(typeof sd.shop_schema).toEqual("object");
     expect(typeof sd.shop_model).toEqual("function");
   });
@@ -70,7 +75,7 @@ xdescribe("shop schema",function(){
     
   });
 
-  it("get_shops: can find docs from db",function(){
+  xit("get_shops: can find docs from db",function(){
     var index = 0;
     var fields = "shopname shoplogo";
     runs(function(){
@@ -167,7 +172,7 @@ xdescribe("shop schema",function(){
 
   });
 
-  it("update_badgood: can update daygood daybad goodt badt priority",function(){
+  xit("update_badgood: can update daygood daybad goodt badt priority",function(){
     var goodt, badt, wdg, prio, wdb
     var goodt1, badt1, wdg1, prio1, wdb1;
     var curtime = new Date();
@@ -213,7 +218,7 @@ xdescribe("shop schema",function(){
     });
   });
   
-  it("update_shop_logo: can update the logo of a shop in db",function(){
+  xit("update_shop_logo: can update the logo of a shop in db",function(){
     var shoplogo = "./images/test.jpg";
     var shopdefault = "./images/default.jpg";
     var fields = "shoplogo";
@@ -237,7 +242,7 @@ xdescribe("shop schema",function(){
 
   });
 
-  it("update_comments_num: can update comment num", function(){
+  xit("update_comments_num: can update comment num", function(){
     var fields = "shopcommentsnum";
     var num, num1;
     runs(function(){
@@ -263,7 +268,7 @@ xdescribe("shop schema",function(){
     })
   });
 
-  it("remove_shop_by_id: can remove a shop from db",function(){
+  xit("remove_shop_by_id: can remove a shop from db",function(){
     var thisid;
     var tdoc;
     runs(function(){

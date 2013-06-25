@@ -1,7 +1,7 @@
 var Controller = require("../lib/easydian/controller")
 require('../lib/easydian/config')
 
-describe("Controller",function(){
+xdescribe("Controller",function(){
   
   var cs = new Controller();
   var ExistID = '514b0e2c8b4309c20a000001';
