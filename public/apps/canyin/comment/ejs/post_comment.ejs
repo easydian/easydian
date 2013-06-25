@@ -1,0 +1,14 @@
+<% for(var i = 0; i < this.length; i++){ %>  
+<li id="<%= this[i]._id %>" >
+    <div class="avatar"><a href="#"><img src="images/avatar/avatar.jpg" width="68" height="68" alt="" /></a></div>
+    <div class="comment_right">
+        <div class="comment_right">
+            <div class="comment_info">
+                Posted by <a href="#user"><%= this[i].username %></a> <span>|</span> <%= this[i].createtime %> <span>|</span> <a id="<%= "update_" + this[i]._id %>" href="javascript:void(0)">Edit</a><span>|</span> <a id="<%= "delete_" + this[i]._id %>" href="javascript:void(0)">Delete</a>
+            </div>
+            <%= this[i].comment %>
+        </div>   
+    </div>
+    <div class="clear"></div>
+</li> 
+<% } %>

@@ -12,21 +12,25 @@ can.Control('Apps.FeatureCtrl', {
         var $page_container = $('#page_container');
         if(options.page == 'scaffolding') {
             easyUtils.set_current_menu('menu_feature', 'menu_scaffolding');
+            easyUtils.set_title('Feature-Scaffolding');
             $page_container.append(can.view(layout_ejs_dir  + 'breadcrumb.ejs', {hash: 'feature', type: 'Feature', 'page': 'Scaffolding'}));
             $page_container.append(can.view(feature_ejs_dir  + 'scaffolding.ejs'));
         }
         else if(options.page == 'shortcodes'){
             easyUtils.set_current_menu('menu_feature', 'menu_shortcodes');
+            easyUtils.set_title('Feature-Shortcodes');
             $page_container.append(can.view(layout_ejs_dir  + 'breadcrumb.ejs', {hash: 'feature', type: 'Feature', 'page': 'Short Codes'}));
             $page_container.append(can.view(feature_ejs_dir  + 'shortcodes.ejs'));
         }
         else if(options.page == 'tables'){
             easyUtils.set_current_menu('menu_feature', 'menu_tables');
+            easyUtils.set_title('Feature-Tables');
             $page_container.append(can.view(layout_ejs_dir  + 'breadcrumb.ejs', {hash: 'feature', type: 'Feature', 'page': 'Tables'}));
             $page_container.append(can.view(feature_ejs_dir  + 'tables.ejs'));
         }
         else {
             easyUtils.set_current_menu('menu_feature', 'menu_typography');
+            easyUtils.set_title('Feature-Typography');
             $page_container.append(can.view(layout_ejs_dir  + 'breadcrumb.ejs', {hash: 'feature', type: 'Feature', 'page': 'Typography'}));
             $page_container.append(can.view(feature_ejs_dir  + 'typography.ejs'));
         }             

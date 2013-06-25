@@ -20,7 +20,7 @@ can.Model("Models.User", {
             type: 'delete'
         });   
     },
-    collect: function(id, data, success) {
+    collect: function(data, success) {
         return can.ajax({
             url:  '/users/' + id + '/collect',
             type: 'put',

@@ -24,11 +24,17 @@ can.Control('Apps.RoutingCtrl', {
                 if(widget === 'canyin') {   
                     steal('/apps/canyin/canyin.js', function() {                
                         if(sub !== 'praise' && sub !== 'collect' && sub !== 'criticize')
-                            $('#page_container').empty();                                 
-                            
+                            $('#page_container').empty();                                                             
                         new Apps.CanyinCtrl($('#page_container'), {page: sub});
                     });
                 } 
+                else if(widget === 'canyin_comment')  {
+                    steal('/apps/canyin/comment/comment.js', function() {
+                        if(sub !== 'destroy' && sub !== 'create' && sub !== 'update')
+                            $('#page_container').empty();  
+                        new Apps.CanyinCommentCtrl($('#page_container'), {page: sub});
+                    });
+                }                 
                 else if(widget === 'feature')  {
                     steal('/apps/feature/feature.js', function() {
                         $('#page_container').empty();

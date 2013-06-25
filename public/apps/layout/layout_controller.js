@@ -6,6 +6,7 @@ can.Control('Apps.LayoutCtrl', {
 },
 {
     init: function(element, options) {
+        easyUtils.set_title('Home');
         var layout_ejs_dir = '/apps/layout/ejs/';
         can.when(
             Models.Canyin.ads(function(data){

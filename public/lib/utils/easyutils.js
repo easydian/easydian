@@ -45,6 +45,10 @@
             $('#' + sub).addClass('current');
     }
 
+    easyUtils.set_title = function(title) {
+        $('title').html(title);
+    }
+
     easyUtils.set_account_hover = function() {
         $('#account_menu').hover(function() {
             $(this).animate({

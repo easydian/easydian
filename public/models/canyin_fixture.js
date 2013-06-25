@@ -34,49 +34,58 @@ can.fixture('GET /canyin/shop/{id}', function() {
 });
 
 can.fixture('POST /canyin/shop', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('PUT /canyin/shop/{id}', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('DELETE /canyin/shop/{id}', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('PUT /canyin/shop/{id}/visit', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('PUT /canyin/shop/{id}/bad', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('PUT /canyin/shop/{id}/good', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('GET /canyin/shop/{id}/comments', function() {
-    return [{'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'},
-        {'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'},
-        {'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'},
-        {'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'},
-        {'_id': random(10000000, 999999), 'shopid': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013'}];
+    return [{'_id': 1, 'username': 'Adam White', 'comment': 'I like this site, has inline comments', 'createtime': '25 Apr 2013', 'inline': true, 'reply_id': '111111'},
+        {'_id': 2, 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': true, 'reply_id': '111111'},
+        {'_id': 3, 'username': 'Tom Sawyer', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': true, 'reply_id': '33333'},
+        {'_id': 4, 'username': 'Tom Sawyer', 'comment': 'I like this site, has inline comments', 'createtime': '25 Apr 2013', 'inline': true, 'reply_id': '33333'},
+        {'_id': 5, 'username': 'Adam White', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': true, 'reply_id': '33333'},
+        {'_id': 111111, 'username': 'Adam White', 'comment': 'I like this site, has inline comments', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': '1,2'},
+        {'_id': random(10000000, 999999), 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''},
+        {'_id': random(10000000, 999999), 'username': 'Tom Sawyer', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''},
+        {'_id': 33333, 'username': 'Tom Sawyer', 'comment': 'I like this site, has inline comments', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': '3,4,5'},
+        {'_id': random(10000000, 999999), 'username': 'Adam White', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': false, 'reply_id': ''}];        
+});
+
+can.fixture('GET /canyin/shop/{id}/comment', function() {
+    return {'_id': 22222, 'username': 'Guest', 'comment': 'I like this site', 'createtime': '25 Apr 2013', 'inline': true, 'reply_id': ''};
 });
 
 can.fixture('PUT /canyin/shop/{id}/comment', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('POST /canyin/shop/{id}/comment', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('DELETE /canyin/shop/{id}/comment', function() {
-    return 'OK';
+    return true;
 });
 
 can.fixture('GET /canyin/shop/{id}/news', function() {
-    return 'OK';
+    return true;
 });
