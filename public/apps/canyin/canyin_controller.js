@@ -33,10 +33,10 @@ can.Control('Apps.CanyinCtrl', {
                 steal('jquery-prettyPhoto', '/css/prettyPhoto.css').then(function(){                                    
                     var tool_bar = '<div class="twitter"><a id="praise" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_343_thumbs_up.png" alt="" /></a><a id="collect" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_049_star.png" alt="" /></a><a id="criticize" href="javascript:void(0)"" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_344_thumbs_down.png" alt="" /></a></div>';
                     //PrettyPhoto
-                    $("a[rel^='prettyPhoto']").prettyPhoto({theme:'light_rounded', social_tools: tool_bar, resethash: 'canyin', default_height: 544, default_width: 600,                 
+                    $("a[rel^='prettyPhoto']").prettyPhoto({theme:'light_rounded', social_tools: tool_bar, resethash: 'canyin', default_height: 430, default_width: 580,                 
                         beforeinlineclonecallback: function(){
-                            $('#canyin_chart_view').css({'height':'200px', 'width':'600px'});
-                            $('#canyin_comment_view').css({'height':'200px', 'width':'600px'});
+                            $('#canyin_chart_view').css({'height':'200px', 'width':'580px'});
+                            $('#canyin_comment_view').css({'height':'200px', 'width':'580px', 'margin-top': '15px'});
                         }, 
                         changepicturecallback: function() {
                             $('#inline_canyin_chart_view').empty();
@@ -123,7 +123,7 @@ can.Control('Apps.CanyinCtrl', {
                     renderTo: 'canyin_chart_view',
                     type  : 'spline',
                     height: 200,
-                    width : 600
+                    width : 580
                 },
                 credits: {
                     enabled: true,
