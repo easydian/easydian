@@ -1,0 +1,13 @@
+<% for(var i=0; i<this.length; i++){ %>                                 
+    <div class="span3 element <%= this[i].style %>" data-category="<%= this[i].style %>">
+        <div class="hover_img"> 
+            <img id="<%= this[i]._id %>" src="<%= this[i].shoplogo %>" alt="" />                       
+            <span class="portfolio_zoom"><a href="#inline_canyin_chart_view" rel="prettyPhoto"></a></span>
+            <span class="portfolio_link"><a href="#canyin_comment">View item</a></span>
+        </div> 
+        <div class="item_description">
+            <h6 style="text-align: left"><a href="<%= this[i].shopwebsite %>"><%= this[i].shopname %></a></h6>
+            <div class="descr" style="height: 100px"><%= this[i].description %><a href="#canyin_comment">...>>Read more...</a></div>
+        </div>                                    
+    </div>
+<% } %>

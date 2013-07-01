@@ -1,13 +1,16 @@
 /* SORTING */ 
 
 $(function(){
-	$.fn.sorting = function() {
+	$.fn.sorting = function(type, content) {
 	  var $container = this;
 
 		$container.imagesLoaded(function() {
+			if (type == 'appended') {
+				$container.append(content).isotope('appended', content);
+			}
 		  $container.isotope({
-			itemSelector : '.element'
-		  });
+				itemSelector : '.element'
+		  });	
 		});
 	    
 	  var $optionSets = $('#options .option-set'),

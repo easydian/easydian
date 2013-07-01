@@ -21,6 +21,16 @@
         parent.append('<div id="' + selector + '"></div>');
     };
 
+    easyUtils.show_filter = function(element, data) {
+        for(var i=0; i<data.length; i++){
+            element.each(function(){ 
+                var option = $(this).attr('data-option-value');
+                if(option.indexOf(data[i].style) != -1)
+                    $(this).css('display', 'block');
+            })
+        }
+    };
+
     easyUtils.recover_element = function(selector, id) {
         selector.append('<div id="' + id + '"></div>');
     };    

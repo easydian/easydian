@@ -5,18 +5,14 @@
         <div class="row news_block">
             <div class="span6">
                 <ul id="inline_comment" class="jcarousel-skin-tango">
+                <% for(var i = 0; i < this.length; i++){ %>
                     <li>
-                    Cras vulputate pretium massa gravida egestas consectetur?<span>Lorem ipsum dolor sit amet &amp; consectetur adipiscing elit!Cras vulputate pretium massa gravida egestas consectetur?<span>Lorem ipsum dolor sit amet &amp; consectetur adipiscing elit!Cras vulputate pretium massa gravida egestas consectetur?<a href="#canyin_comment">...>>Read more...</a>
+                        <div class="post_meta">
+                            Posted by <a href="#"><%= this[i].username %></a><%= "/" + this[i].createtime %>
+                        </div>
+                        <%= this[i].comment %><a href="#canyin_comment">...>>Read more...</a>
                     </li> 
-                    <li>
-                    Cras vulputate pretium massa gravida egestas consectetur?<span>Lorem ipsum dolor sit amet &amp; consectetur adipiscing elit!Cras vulputate pretium massa gravida egestas consectetur?<span>Lorem ipsum dolor sit amet &amp; consectetur adipiscing elit!Cras vulputate pretium massa gravida egestas consectetur?<a href="#canyin_comment">...>>Read more...</a>
-                    </li>
-                    <li>
-                    Cras vulputate pretium massa gravida egestas consectetur?<span>Lorem ipsum dolor sit amet &amp; consectetur adipiscing elit!Cras vulputate pretium massa gravida egestas consectetur?<span>Lorem ipsum dolor sit amet &amp; consectetur adipiscing elit!Cras vulputate pretium massa gravida egestas consectetur?<a href="#canyin_comment">...>>Read more...</a>
-                    </li>
-                    <li>
-                    Cras vulputate pretium massa gravida egestas consectetur?<span>Lorem ipsum dolor sit amet &amp; consectetur adipiscing elit!Cras vulputate pretium massa gravida egestas consectetur?<span>Lorem ipsum dolor sit amet &amp; consectetur adipiscing elit!Cras vulputate pretium massa gravida egestas consectetur?<a href="#canyin_comment">...>>Read more...</a>
-                    </li>                                                       
+                <% } %>                                                     
                 </ul>                         
             </div>                
         </div>                

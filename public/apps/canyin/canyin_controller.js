@@ -1,9 +1,9 @@
 can.Control('Apps.CanyinCtrl', {
     pluginName: 'canyin',
     defaults: {
-        current_user: null,
-        comment_id:   0,
-        page_id:      0
+        current_user:     null,
+        comment_id:       0,
+        shops_page_id:    1
     }
 },
 {
@@ -14,21 +14,17 @@ can.Control('Apps.CanyinCtrl', {
         easyUtils.set_title('Canyin');
 
         if(options.page === undefined) {
+            var content;
             can.when(                
-                Models.Canyin.findAll({'start': (Apps.CanyinCtrl.defaults.page_id * 20), 'limit': (Apps.CanyinCtrl.defaults.page_id + 1) * 20, 'fields': '_id style shopwebsite shopname shoplogo description'}, function(data){                    
-                    element.append(can.view(canyin_ejs_dir  + 'container.ejs', data));
-
-                    for(var i=0; i<data.length; i++){
-                        $('#filters li a').each(function(){ 
-                            var option = $(this).attr('data-option-value');
-                            if(option.indexOf(data[i].style) != -1)
-                                $(this).css('display', 'block');
-                        })
-                    }
+                Models.Canyin.findAll({'start': 0, 'limit': 20, 'fields': '_id style shopwebsite shopname shoplogo description'}, function(data){
+                    element.append(can.view(canyin_ejs_dir  + 'container.ejs'));                
+                    easyUtils.show_filter($('#filters li a'), data);
+                    $('.projects').append(can.view(canyin_ejs_dir  + 'container_shops.ejs', data));
                 })
             ).then(function(){
                 steal('jquery-isotope').then('sorting').then(function(){ 
-                    $('.projects').sorting();
+                    //$('.projects').append(content).isotope('appended', content);
+                    $('.projects').sorting('none');
                 });  
                 steal('jquery-prettyPhoto', '/css/prettyPhoto.css').then(function(){                                    
                     var tool_bar = '<div class="twitter"><a id="praise" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_343_thumbs_up.png" alt="" /></a><a id="collect" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_049_star.png" alt="" /></a><a id="criticize" href="javascript:void(0)"" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_344_thumbs_down.png" alt="" /></a></div>';
@@ -40,12 +36,8 @@ can.Control('Apps.CanyinCtrl', {
                         }, 
                         changepicturecallback: function() {
                             $('#inline_canyin_chart_view').empty();
-                            Models.Canyin.findOne({id: $.cookie("canyin_shop_id")}, function(data){
-                                self.create_spline_view(data);
-                            });  
-                            Models.CanyinComment.findAll({id: $.cookie("canyin_shop_id")}, function(data){
-                                self.render_comments(data);
-                            });                                                           
+                            self.create_spline_view();
+                            self.render_comments();                                                       
                         },  
                         callback: function() {
                             easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_chart_view');                                          
@@ -91,7 +83,13 @@ can.Control('Apps.CanyinCtrl', {
         ).then(function(){
         });
     },
-    create_spline_view: function(data) {
+    '{window} scroll': function() {
+        var self = this;
+        if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+            self.render_shops();
+        }
+    },
+    create_spline_view: function() {
         locate_marker = function(arr, flag) {
             var i, low = 0, up = 0, max = arr[0], min = arr[0];
             for(i = 1; i < arr.length; i++) {
@@ -117,76 +115,112 @@ can.Control('Apps.CanyinCtrl', {
             return arr;
         };
 
-        steal('highcharts').then('highcharts-exp').then(function(){
-            new Highcharts.Chart({
-                chart: {
-                    renderTo: 'canyin_chart_view',
-                    type  : 'spline',
-                    height: 200,
-                    width : 580
-                },
-                credits: {
-                    enabled: true,
-                    text: 'More... >>',
-                    href: '#canyin_comment'
-                },                            
-                title: {
-                    text: 'Weekly Comments Record'
-                },
-                legend: {
-                    enabled: false
-                },
-                xAxis: {
-                    categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sta',
-                        'Sun']
-                },
-                yAxis: {
+        Models.Canyin.findOne({id: $.cookie("canyin_shop_id")}, function(data){
+            steal('highcharts').then(function(){
+                new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'canyin_chart_view',
+                        type  : 'spline',
+                        height: 200,
+                        width : 580
+                    },
+                    credits: {
+                        enabled: true,
+                        text: 'More... >>',
+                        href: '#canyin_comment'
+                    },                            
                     title: {
-                        text: 'Comments'
+                        text: 'Weekly Comments Record'
                     },
-                    labels: {
-                        formatter: function() {
-                            return this.value
+                    legend: {
+                        enabled: false
+                    },
+                    xAxis: {
+                        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sta',
+                            'Sun']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Comments'
+                        },
+                        labels: {
+                            formatter: function() {
+                                return this.value
+                            }
                         }
-                    }
-                },
-                tooltip: {
-                    crosshairs: true,
-                    shared: true
-                },
-                plotOptions: {
-                    spline: {
+                    },
+                    tooltip: {
+                        crosshairs: true,
+                        shared: true
+                    },
+                    plotOptions: {
+                        spline: {
+                            marker: {
+                                radius: 4,
+                                lineColor: '#666666',
+                                lineWidth: 1
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Praise',
                         marker: {
-                            radius: 4,
-                            lineColor: '#666666',
-                            lineWidth: 1
-                        }
-                    }
-                },
-                series: [{
-                    name: 'Praise',
-                    marker: {
-                        symbol: 'square'
-                    },
-                    data: locate_marker(data.shopgoodt, true)
-        
-                }, {
-                    name: 'Criticize',
-                    marker: {
-                        symbol: 'diamond'
-                    },
-                    data: locate_marker(data.shopbadt, false)
-                }]
+                            symbol: 'square'
+                        },
+                        data: locate_marker(data.shopgoodt, true)
+            
+                    }, {
+                        name: 'Criticize',
+                        marker: {
+                            symbol: 'diamond'
+                        },
+                        data: locate_marker(data.shopbadt, false)
+                    }]
+                });
             });
         });               
     }, 
-    render_comments: function(data) {        
-        steal('jquery-jcarousel').then('/css/skins/tango/skin.css').then(function(){ 
-            $('#canyin_comment_view').append(can.view('/apps/canyin/ejs/inline_comment.ejs', data));
-
-            $('#inline_comment').jcarousel();  
+    render_comments: function() { 
+        Models.CanyinComment.findAll({id: $.cookie("canyin_shop_id"), 'start': 0, 'limit': 15, 'fields': '_id username comment createtime'}, function(data){       
+            steal('jquery-jcarousel').then('/css/skins/tango/skin.css').then(function(){ 
+                $('#canyin_comment_view').append(can.view('/apps/canyin/ejs/inline_comment.ejs', data));
+                $('#inline_comment').jcarousel();  
+            });
         });
     },
+    render_shops: function() {
+        var self = this;
+        if(Apps.CanyinCtrl.defaults.loading) return;
+        can.when( 
+            Models.Canyin.findAll({'start': (Apps.CanyinCtrl.defaults.shops_page_id * 20), 'limit': (Apps.CanyinCtrl.defaults.shops_page_id + 1) * 20, 'fields': '_id style shopwebsite shopname shoplogo description'}, function(data){
+                Apps.CanyinCtrl.defaults.shops_page_id++;
+                easyUtils.show_filter($('#filters li a'), data);
+                var $content = $(can.view('/apps/canyin/ejs/container_shops.ejs', data));
+                //$('#inline_canyin_chart_view').before($content);
+                $('.projects').sorting('appended', $content);
+            })
+        ).then(function(){
+            steal('jquery-prettyPhoto', '/css/prettyPhoto.css').then(function(){                                    
+                var tool_bar = '<div class="twitter"><a id="praise" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_343_thumbs_up.png" alt="" /></a><a id="collect" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_049_star.png" alt="" /></a><a id="criticize" href="javascript:void(0)"" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_344_thumbs_down.png" alt="" /></a></div>';
+                //PrettyPhoto
+                $("a[rel^='prettyPhoto']").prettyPhoto({theme:'light_rounded', social_tools: tool_bar, resethash: 'canyin', default_height: 430, default_width: 580,                 
+                    beforeinlineclonecallback: function(){
+                        $('#canyin_chart_view').css({'height':'200px', 'width':'580px'});
+                        $('#canyin_comment_view').css({'height':'200px', 'width':'580px', 'margin-top': '15px'});
+                    }, 
+                    changepicturecallback: function() {
+                        $('#inline_canyin_chart_view').empty();
+                        self.create_spline_view();
+                        self.render_comments();                                                       
+                    },  
+                    callback: function() {
+                        easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_chart_view');                                          
+                        easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_comment_view');                                          
+                    }
+                });
+            }); 
+        });
+    },    
     get_current_user: function(current_user) {
         return defaults.current_user;
     }
