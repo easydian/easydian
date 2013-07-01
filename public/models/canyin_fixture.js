@@ -10,7 +10,6 @@ can.fixture('GET /canyin/shops', function() {
         {'_id': can.fixture.rand(10000000, 999999), 'description': 'Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut.', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
         {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
         {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
-        {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'},
         {'_id': can.fixture.rand(10000000, 999999), 'description': 'Description', 'style': 'western-style','shopwebsite': 'www.edian.com', 'shopname': 'Ken De Ji', 'shoplogo': '/images/portfolio/' + can.fixture.rand(1, 9) + '.jpg'}];
 });
 

@@ -8,47 +8,24 @@ can.Control('Apps.CanyinCtrl', {
 },
 {
     init: function(element, options) {
-        var self = this;
-        var canyin_ejs_dir = '/apps/canyin/ejs/';
-        var layout_ejs_dir = '/apps/layout/ejs/';
         easyUtils.set_title('Canyin');
-
-        if(options.page === undefined) {
-            var content;
-            can.when(                
-                Models.Canyin.findAll({'start': 0, 'limit': 20, 'fields': '_id style shopwebsite shopname shoplogo description'}, function(data){
-                    element.append(can.view(canyin_ejs_dir  + 'container.ejs'));                
-                    easyUtils.show_filter($('#filters li a'), data);
-                    $('.projects').append(can.view(canyin_ejs_dir  + 'container_shops.ejs', data));
-                })
-            ).then(function(){
-                steal('jquery-isotope').then('sorting').then(function(){ 
-                    //$('.projects').append(content).isotope('appended', content);
-                    $('.projects').sorting('none');
-                });  
-                steal('jquery-prettyPhoto', '/css/prettyPhoto.css').then(function(){                                    
-                    var tool_bar = '<div class="twitter"><a id="praise" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_343_thumbs_up.png" alt="" /></a><a id="collect" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_049_star.png" alt="" /></a><a id="criticize" href="javascript:void(0)"" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_344_thumbs_down.png" alt="" /></a></div>';
-                    //PrettyPhoto
-                    $("a[rel^='prettyPhoto']").prettyPhoto({theme:'light_rounded', social_tools: tool_bar, resethash: 'canyin', default_height: 430, default_width: 580,                 
-                        beforeinlineclonecallback: function(){
-                            $('#canyin_chart_view').css({'height':'200px', 'width':'580px'});
-                            $('#canyin_comment_view').css({'height':'200px', 'width':'580px', 'margin-top': '15px'});
-                        }, 
-                        changepicturecallback: function() {
-                            $('#inline_canyin_chart_view').empty();
-                            self.create_spline_view();
-                            self.render_comments();                                                       
-                        },  
-                        callback: function() {
-                            easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_chart_view');                                          
-                            easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_comment_view');                                          
-                        }
-                    });
-                });                                 
-            });
-        }
-
         easyUtils.set_current_menu('menu_canyin');
+
+        var self = this;
+        var $content;
+        
+        element.append(can.view('/apps/canyin/ejs/'  + 'container.ejs')); 
+        
+        can.when(                
+            Models.Canyin.findAll({'start': 0, 'limit': 20, 'fields': '_id style shopwebsite shopname shoplogo description'}, function(data){                            
+                easyUtils.show_filter($('#filters li a'), data);
+                $content = $(can.view('/apps/canyin/ejs/'  + 'container_shops.ejs', data));
+                $('#shops_group').append($content);
+            })
+        ).then(function(){                            
+            self.prettyPhoto_shops();  
+            self.sorting_shops($('#shops_group'), $content);                              
+        });
     },
     '.hover_img mouseover': function(element) {
         var info=element.find("img");
@@ -190,37 +167,60 @@ can.Control('Apps.CanyinCtrl', {
     },
     render_shops: function() {
         var self = this;
+        var $content;
         if(Apps.CanyinCtrl.defaults.loading) return;
         can.when( 
             Models.Canyin.findAll({'start': (Apps.CanyinCtrl.defaults.shops_page_id * 20), 'limit': (Apps.CanyinCtrl.defaults.shops_page_id + 1) * 20, 'fields': '_id style shopwebsite shopname shoplogo description'}, function(data){
                 Apps.CanyinCtrl.defaults.shops_page_id++;
                 easyUtils.show_filter($('#filters li a'), data);
-                var $content = $(can.view('/apps/canyin/ejs/container_shops.ejs', data));
-                //$('#inline_canyin_chart_view').before($content);
-                $('.projects').sorting('appended', $content);
+                $content = $(can.view('/apps/canyin/ejs/container_shops.ejs', data)); 
+                $('#shops_group').append($content);            
             })
         ).then(function(){
-            steal('jquery-prettyPhoto', '/css/prettyPhoto.css').then(function(){                                    
-                var tool_bar = '<div class="twitter"><a id="praise" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_343_thumbs_up.png" alt="" /></a><a id="collect" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_049_star.png" alt="" /></a><a id="criticize" href="javascript:void(0)"" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_344_thumbs_down.png" alt="" /></a></div>';
-                //PrettyPhoto
-                $("a[rel^='prettyPhoto']").prettyPhoto({theme:'light_rounded', social_tools: tool_bar, resethash: 'canyin', default_height: 430, default_width: 580,                 
-                    beforeinlineclonecallback: function(){
-                        $('#canyin_chart_view').css({'height':'200px', 'width':'580px'});
-                        $('#canyin_comment_view').css({'height':'200px', 'width':'580px', 'margin-top': '15px'});
-                    }, 
-                    changepicturecallback: function() {
-                        $('#inline_canyin_chart_view').empty();
-                        self.create_spline_view();
-                        self.render_comments();                                                       
-                    },  
-                    callback: function() {
-                        easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_chart_view');                                          
-                        easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_comment_view');                                          
-                    }
-                });
-            }); 
+            self.prettyPhoto_shops();
+            self.sorting_shops($('#shops_group'), $content);            
         });
-    },    
+    }, 
+    sorting_shops: function(element, $content) {
+        steal('jquery-isotope').then(function(){ 
+            var $container = element;
+            //var $new_content = $content.css({opacity: 0});
+            
+            //$container.isotope('appended', $new_content, true);
+            $content.css('opacity', 0); 
+            //$new_content.imagesLoaded(function() { 
+            $content.imagesLoaded(function() {
+                $content.animate({opacity: 1}, 600);               
+                $container.isotope({
+                   itemSelector : '.element',
+                    filter: '*'
+                }); 
+                $container.isotope('appended', $content, true);                                
+            });
+        });
+    }, 
+    prettyPhoto_shops: function() {
+        var self = this;
+        steal('jquery-prettyPhoto', '/css/prettyPhoto.css').then(function(){                                    
+            var tool_bar = '<div class="twitter"><a id="praise" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_343_thumbs_up.png" alt="" /></a><a id="collect" href="javascript:void(0)" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_049_star.png" alt="" /></a><a id="criticize" href="javascript:void(0)"" class="btn" data-count="none"><img src="images/glyphicons/png/glyphicons_344_thumbs_down.png" alt="" /></a></div>';
+            //PrettyPhoto
+            $("a[rel^='prettyPhoto']").prettyPhoto({theme:'light_rounded', social_tools: tool_bar, resethash: 'canyin', default_height: 430, default_width: 580,                 
+                beforeinlineclonecallback: function(){
+                    $('#canyin_chart_view').css({'height':'200px', 'width':'580px'});
+                    $('#canyin_comment_view').css({'height':'200px', 'width':'580px', 'margin-top': '15px'});
+                }, 
+                changepicturecallback: function() {
+                    $('#inline_canyin_chart_view').empty();
+                    self.create_spline_view();
+                    self.render_comments();                                                       
+                },  
+                callback: function() {
+                    easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_chart_view');                                          
+                    easyUtils.recover_element($('#inline_canyin_chart_view'), 'canyin_comment_view');                                          
+                }
+            });
+        }); 
+    },
     get_current_user: function(current_user) {
         return defaults.current_user;
     }

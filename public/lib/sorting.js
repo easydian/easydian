@@ -5,13 +5,14 @@ $(function(){
 	  var $container = this;
 
 		$container.imagesLoaded(function() {
-			if (type == 'appended') {
-				$container.append(content).isotope('appended', content);
-			}
 		  $container.isotope({
 				itemSelector : '.element'
 		  });	
 		});
+
+		if (type == 'appended') {
+			$container.append(content).isotope('appended', content);
+		}		
 	    
 	  var $optionSets = $('#options .option-set'),
 		  $optionLinks = $optionSets.find('a');
