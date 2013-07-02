@@ -2,8 +2,8 @@ can.Control('Apps.CanyinCtrl', {
     pluginName: 'canyin',
     defaults: {
         current_user:     null,
-        comment_id:       0,
-        shops_page_id:    1
+        shops_page_id:    1,
+        loading:          false
     }
 },
 {
@@ -12,19 +12,17 @@ can.Control('Apps.CanyinCtrl', {
         easyUtils.set_current_menu('menu_canyin');
 
         var self = this;
-        var $content;
         
-        element.append(can.view('/apps/canyin/ejs/'  + 'container.ejs')); 
+        element.append(can.view('/apps/canyin/ejs/container.ejs')); 
         
         can.when(                
             Models.Canyin.findAll({'start': 0, 'limit': 20, 'fields': '_id style shopwebsite shopname shoplogo description'}, function(data){                            
                 easyUtils.show_filter($('#filters li a'), data);
-                $content = $(can.view('/apps/canyin/ejs/'  + 'container_shops.ejs', data));
-                $('#shops_group').append($content);
+                $('#shops_group').append(can.view('/apps/canyin/ejs/container_shops.ejs', data));
             })
         ).then(function(){                            
             self.prettyPhoto_shops();  
-            self.sorting_shops($('#shops_group'), $content);                              
+            self.sorting_shops($('#shops_group'));                              
         });
     },
     '.hover_img mouseover': function(element) {
@@ -167,37 +165,33 @@ can.Control('Apps.CanyinCtrl', {
     },
     render_shops: function() {
         var self = this;
-        var $content;
         if(Apps.CanyinCtrl.defaults.loading) return;
-        can.when( 
+        Apps.CanyinCtrl.defaults.loading = true;
+        can.when(             
             Models.Canyin.findAll({'start': (Apps.CanyinCtrl.defaults.shops_page_id * 20), 'limit': (Apps.CanyinCtrl.defaults.shops_page_id + 1) * 20, 'fields': '_id style shopwebsite shopname shoplogo description'}, function(data){
                 Apps.CanyinCtrl.defaults.shops_page_id++;
                 easyUtils.show_filter($('#filters li a'), data);
-                $content = $(can.view('/apps/canyin/ejs/container_shops.ejs', data)); 
-                $('#shops_group').append($content);            
+                $('#shops_group').append(can.view('/apps/canyin/ejs/container_shops.ejs', data));            
             })
-        ).then(function(){
+        ).then(function(){            
             self.prettyPhoto_shops();
-            self.sorting_shops($('#shops_group'), $content);            
+            self.sorting_shops($('#shops_group')); 
+            Apps.CanyinCtrl.defaults.loading = false;           
         });
     }, 
-    sorting_shops: function(element, $content) {
+    sorting_shops: function(element) {
         steal('jquery-isotope').then(function(){ 
             var $container = element;
-            //var $new_content = $content.css({opacity: 0});            
-            //$container.isotope('appended', $new_content, true);
-            //$content.find('div').hasClass('element').css('opacity', 0); 
-            //$new_content.imagesLoaded(function() { 
-            //$container.imagesLoaded(function() {
-            //    $container.append($content).isotope('appended', $content, true);
-            //});
-            $container.imagesLoaded(function() {                
-                //$content.find('div').hasClass('element').animate({opacity: 1}, 600);               
-                //$container.isotope({
-                //   itemSelector : '.element',
-                //    filter: '*'
-                //});                 
-                
+            $container.imagesLoaded(function() { 
+                $container.isotope({
+                    itemSelector : '.element'
+                });
+
+                $('#shops_group > div').each(function(i, el) {
+                    if($(this).hasClass('isotope-item')) return;
+                    $container.isotope('appended', $(this), true);
+                });
+
                 var $optionSets = $('#options .option-set'),
                 $optionLinks = $optionSets.find('a');
 
@@ -221,11 +215,9 @@ can.Control('Apps.CanyinCtrl', {
                     if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
                       // changes in layout modes need extra logic
                       changeLayoutMode( $this, options )
-                      $container.isotope('appended', $content, true);
                     } else {
                       // otherwise, apply new options
                       $container.isotope( options );
-                      $container.isotope('appended', $content, true);
                     }
                     
                     return false;                                                    
@@ -256,6 +248,6 @@ can.Control('Apps.CanyinCtrl', {
         }); 
     },
     get_current_user: function(current_user) {
-        return defaults.current_user;
+        return Apps.CanyinCtrl.defaults.current_user;
     }
 });
