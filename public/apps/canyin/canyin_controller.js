@@ -65,7 +65,7 @@ can.Control('Apps.CanyinCtrl', {
         if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
             self.render_shops();
         }
-    },
+    },        
     create_spline_view: function() {
         locate_marker = function(arr, flag) {
             var i, low = 0, up = 0, max = arr[0], min = arr[0];
@@ -184,18 +184,52 @@ can.Control('Apps.CanyinCtrl', {
     sorting_shops: function(element, $content) {
         steal('jquery-isotope').then(function(){ 
             var $container = element;
-            //var $new_content = $content.css({opacity: 0});
-            
+            //var $new_content = $content.css({opacity: 0});            
             //$container.isotope('appended', $new_content, true);
-            $content.css('opacity', 0); 
+            //$content.find('div').hasClass('element').css('opacity', 0); 
             //$new_content.imagesLoaded(function() { 
-            $content.imagesLoaded(function() {
-                $content.animate({opacity: 1}, 600);               
-                $container.isotope({
-                   itemSelector : '.element',
-                    filter: '*'
-                }); 
-                $container.isotope('appended', $content, true);                                
+            //$container.imagesLoaded(function() {
+            //    $container.append($content).isotope('appended', $content, true);
+            //});
+            $container.imagesLoaded(function() {                
+                //$content.find('div').hasClass('element').animate({opacity: 1}, 600);               
+                //$container.isotope({
+                //   itemSelector : '.element',
+                //    filter: '*'
+                //});                 
+                
+                var $optionSets = $('#options .option-set'),
+                $optionLinks = $optionSets.find('a');
+
+                $optionLinks.click(function(){ 
+                    var $this = $(this);
+                    // don't proceed if already selected
+                    if ( $this.hasClass('selected') ) {
+                      return false;
+                    }
+                    var $optionSet = $this.parents('.option-set');
+                    $optionSet.find('.selected').removeClass('selected');
+                    $this.addClass('selected');
+
+                    // make option object dynamically, i.e. { filter: '.my-filter-class' }
+                    var options = {itemSelector : '.element', filter: '*'},
+                        key = $optionSet.attr('data-option-key'),
+                        value = $this.attr('data-option-value');
+                    // parse 'false' as false boolean
+                    value = value === 'false' ? false : value;
+                    options[ key ] = value;
+                    if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+                      // changes in layout modes need extra logic
+                      changeLayoutMode( $this, options )
+                      $container.isotope('appended', $content, true);
+                    } else {
+                      // otherwise, apply new options
+                      $container.isotope( options );
+                      $container.isotope('appended', $content, true);
+                    }
+                    
+                    return false;                                                    
+                });
             });
         });
     }, 
